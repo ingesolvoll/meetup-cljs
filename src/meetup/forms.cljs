@@ -2,7 +2,7 @@
   (:require [reagent.core :as r]
             [reagent.ratom :refer-macros [reaction]]))
 
-(defonce form-state (r/atom {:first-name "Inge" :last-name "Solvoll"}))
+(defonce form-state (r/atom {:first-name "" :last-name ""}))
 
 (def rules [#(= (:first-name %) "Inge")
             #(= (:last-name %) "Solvoll")])

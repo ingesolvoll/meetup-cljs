@@ -14,8 +14,7 @@
     [:h1 "LISP"]
     [:p.fragment "Java virtual machine"]
     [:p.fragment "ClojureScript"]
-    [:p.fragment "Leiningen"]
-    ]
+    [:p.fragment "Leiningen"]]
 
    [:section
     [:h1 "LISP 1-2-3"]
@@ -29,6 +28,14 @@
     [:p.fragment "#{true false \"unique\"}"]]
 
    [:section
+    [:h3 "\"Variabler\""]
+    [:pre.fragment [:code "(def my-variable 2) ; Available globally in namespace"]]
+    [:pre.fragment [:code "(let [my-variable 2]
+    (+ 1 my-variable)) ; Let statement returns 3
+
+my-variable ; Not available here, throws exception"]]]
+
+   [:section
     [:h3 "Funksjon = lister og vektorer"]
     [:pre.fragment [:code "(fn [x y]
     (+ (rand-int x) (rand-int y)))"]]
@@ -40,16 +47,16 @@
     [:pre [:code "(split-string \",\" \"testing,testing\")"]]]
 
    [:section
-    [:h3 "Lokalt scope med liste og vektor"]
-    [:pre [:code "(let [whatever (rand-int 10)]
-    (println \"Made up a number\" whatever))"]]]
+    [:h1 "Fullskala eksempel"]
+    [:pre [:code "(->> \"1 4 ::2,3,4,5  8\"
+    (re-seq #\"w+\")
+    (map js/parseInt)
+    (filter odd?)
+    (apply +))
 
-   [:section
-    [:h1 "LISP 1-2-3"]
-    [:p.fragment "[1 2 3].map(function(x) {return x * 2})"]
-    [:p.fragment "="]
-    [:p.fragment "(map (fn [x] (* 2 x)) [1 2 3])"
-     ]]
+
+
+    ; => The answer is 9"]]]
 
    [:section
     [:h1 "React"]

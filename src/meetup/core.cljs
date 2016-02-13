@@ -12,7 +12,7 @@
 
 (defn init []
   (let [prev-slide @slides-state]
-    (.initialize js/Reveal (clj->js {:history true}))
+    (.initialize js/Reveal)
     (when prev-slide
       (.slide js/Reveal prev-slide)))
 
