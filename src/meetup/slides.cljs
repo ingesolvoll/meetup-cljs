@@ -11,18 +11,48 @@
      "Inge Solvoll"]]
 
    [:section
-    [:h1 "LISP"]
+    [:h1 "Korps"]
+    [:img {:src "centertone-gold6.jpg"}]]
+
+   [:section
+    [:h3 "Korps: ikke bra"]
+    [:p.fragment.error "Dugnad"]
+    [:p.fragment.error "Fryktelig musikk"]
+    [:p.fragment.error "17. mai"]]
+
+   [:section
+    [:h3 "Korps: bra"]
+    [:p.fragment "Lese noter"]
+    [:p.fragment "Samspill"]
+    [:p.fragment "Sosialt for alle aldre"]
+    [:p.fragment "Alle er faktisk med"]]
+
+   [:section
+    [:h1 "Just say no"]]
+
+   [:section
+    [:h3 "Clojure: ikke bra"]
+    [:p.fragment "Uleselig"]
+    [:p.fragment "Dynamisk"]
+    [:p.fragment "Vanskelig rekruttering"]
+    [:p.fragment "Tung start"]
+    ]
+
+   [:section
+    [:h2 "Clojure"]
     [:p.fragment "Java virtual machine"]
     [:p.fragment "ClojureScript"]
-    [:p.fragment "Leiningen"]]
+    [:p.fragment "Leiningen"]
+    [:p.fragment "Namespaces"]
+    [:p.fragment "Maven dependencies"]]
 
    [:section
     [:h1 "LISP 1-2-3"]
     [:p "Kode er data, hva betyr det?"]]
 
    [:section
-    [:h1 "Datastrukturer"]
-    [:p.fragment "'(1 2 3 4 5)"]
+    [:h3 "Datastrukturer"]
+    [:p.fragment "(1 2 3 4 5)"]
     [:p.fragment "[:vector :med :keywords]"]
     [:p.fragment "{:keys-and \"values\" :come-in :pairs}"]
     [:p.fragment "#{true false \"unique\"}"]]
@@ -47,16 +77,22 @@ my-variable ; Not available here, throws exception"]]]
     [:pre [:code "(split-string \",\" \"testing,testing\")"]]]
 
    [:section
-    [:h1 "Fullskala eksempel"]
-    [:pre [:code "(->> \"1 4 ::2,3,4,5  8\"
-    (re-seq #\"w+\")
-    (map js/parseInt)
-    (filter odd?)
-    (apply +))
+    [:h3 "Parantesbonanza"]
+    [:pre [:code "(/ 2 (+ 4 (* 3 (- 5 2))))"]]
+    [:p.fragment "Ingen problemer med prioritet"]
+    [:p.fragment "Muuuligens noe tunglest"]]
 
-
-
-    ; => The answer is 9"]]]
+   [:section
+    [:h3 "Dypere vann"]
+    [:pre [:code "(->>" [:span.fragment " \"1 4 ::2,3,4,5  8\""]
+           [:span.fragment "\n     (re-seq #\"\\w+\")"]
+           [:span.fragment "    ;(\"1\",\"4\",\"2\",\"3\",\"4\",\"5\",\"8\")"]
+           [:span.fragment "\n     (map js/parseInt)"]
+           [:span.fragment "  ;(1,4,2,3,4,5,8)"]
+           [:span.fragment "\n     (filter odd?)"]
+           [:span.fragment "      ;(1,3,5)"]
+           [:span.fragment "\n     (apply +))"]
+           [:span.fragment "         ; 9"]]]]
 
    [:section
     [:h1 "React"]
@@ -97,16 +133,50 @@ my-variable ; Not available here, throws exception"]]]
       ]]]
 
    [:section
-    [:h1 "Hiccup syntax"]
+    [:h1 "Reagent"]
+    [:pre
+     [:code.clojure
+      "(defn Comment [author]
+  [:div.comment>div.commentAuthor author])"
+      ]]]
+
+   [:section
+    [:h3 "Hiccup syntax"]
     [:pre.fragment
      [:code.clojure
-      "[:tagname.styleclass {:attr-key \"attr-value\"} child-content]"
-      ]]
+      "[:tagname.styleclass {:attr-key \"attr-value\"} child-content]"]]
     [:pre.fragment
      [:code.clojure
       "[:div.form-group
   [:input {:type \"text\" :value \"Hello\"}]]"
       ]]]
+
+   [:section
+    [:h3 "Atoms"]
+    [:pre>code
+     [:span.fragment "(def state (atom {}))"]
+     [:span.fragment "\n\n(reset! state {:name \"Inge\"})"]
+     [:span.fragment "\n\n(swap! state assoc :address \"Trondheim\")"]
+     [:span.fragment "\n\n[:input {:type :text :value (:name @state)}]"]
+     ]]
+
+   [:section
+    [:h3 "Live reload 1.0"]
+    [:p.fragment "F5"]
+    [:p.fragment "State reloades sammen med koden"]
+    [:p.fragment "Veldig mye bedre enn compile-deploy-restart"]
+    ]
+
+   [:section
+    [:h3 "Reloadable code"]
+    [:p.fragment "Skarpt skille mellom state og logikk"]
+    [:p.fragment "Setup/teardown"]
+    [:p.fragment "Ikke snakke direkte med DOM"]
+    [:p.fragment "React <3"]
+    ]
+
+   [:section
+    [:h3 "Live reload 2.0: Figwheel"]]
 
    [:section
     [:h1 "Bootstrap form"]
