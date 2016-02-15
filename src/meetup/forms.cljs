@@ -1,54 +1,57 @@
 (ns meetup.forms
   (:require [reagent.core :as r]
-            [reagent.ratom :refer-macros [reaction]]))
+            [reagent.ratom :refer-macros [reaction]]
+            [clojure.string :as str]))
 
-(def form-state (r/atom {:first-name "" :last-name ""}))
+(defonce form-state (r/atom {:first-name "" :last-name "" :address "" :city "" :zip "" :mobile ""}))
 
-(def rules [#(= (:first-name %) "Inge")
-            #(= (:last-name %) "Solvoll")
-            #(= (:city %) "Bartebyen")
-            #(-> % :zip js/parseInt js/isNaN not)])
 
-(defn validation-results [form-state]
-  (map (fn [validator] (validator form-state)) rules))
-
-(def valid-count (reaction
-                   (->> (validation-results @form-state)
-                        (filter true?)
-                        count)))
-
-(def progress (reaction (* 100 (/ @valid-count 4))))
-
-(defn progress-bar [progress]
-  (let [percent (str progress "%")]
-    [:div {:class (if (< progress 100) "error")} "Du er " percent " ferdig"]))
-
-(defn names []
+(defn input-field [label key state]
   [:div
-   [:div [progress-bar @progress]]
-   [:div.row
-    [:div.col-md-4
-     [:label "Fornavn"]
-     [:input.form-control {:type      :text
-                           :value     (:first-name @form-state)
-                           :on-change #(swap! form-state assoc :first-name (-> % .-target .-value))}]]
-    [:div.col-md-4
-     [:label "Etternavn"]
-     [:input.form-control {:type      :text
-                           :value     (:last-name @form-state)
-                           :on-change #(swap! form-state assoc :last-name (-> % .-target .-value))}]]
+   [:label label]
+   [:input.form-control {:type  :text
+                         :value (key @state)
+                         :on-change
+                                #(swap! state assoc
+                                        key (-> % .-target .-value))}]])
 
-    ]
-   [:div.row
-    [:div.col-md-4
-     [:label "By"]
-     [:input.form-control {:type      :text
-                           :value     (:city @form-state)
-                           :on-change #(swap! form-state assoc :city (-> % .-target .-value))}]]
-    [:div.col-md-4
-     [:label "Postnummer"]
-     [:input.form-control {:type      :text
-                           :value     (:zip @form-state)
-                           :on-change #(swap! form-state assoc :zip (-> % .-target .-value))}]]
+(defn floor [n]
+  (.floor js/Math n))
 
-    ]])
+(defn required [input]
+  (not (str/blank? input)))
+
+(defn valid-integer? [input]
+  (not (js/isNaN (js/parseInt input))))
+
+(def validations {:first-name required
+                  :last-name  required
+                  :address    required
+                  :city       required
+                  :zip        valid-integer?
+                  :mobile     valid-integer?})
+
+(defn validate-field [[key value]]
+  (let [validation-fn (key validations)]
+    (validation-fn value)))
+
+(def validation-results (reaction
+                          (map validate-field @form-state)))
+
+(def success-number (reaction
+                      (->> @validation-results
+                           (filter true?)
+                           count)))
+
+(defn automatic-field [index key]
+  ^{:key index}
+  [input-field (name key) key form-state])
+
+(defn registration []
+  [:div
+   [:div "Completion: " (-> @success-number
+                            (/ (count @form-state))
+                            (* 100)
+                            (floor)) "%"]
+   (map-indexed automatic-field (keys @form-state))
+   ])

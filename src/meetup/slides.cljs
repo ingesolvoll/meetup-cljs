@@ -162,7 +162,7 @@ my-variable ; Not available here, throws exception"]]]
 
    [:section
     [:h3 "Live reload 1.0"]
-    [:p.fragment "F5"]
+    [:p.fragment [:img {:src "f5_key.png" :width "100" :height "100"}]]
     [:p.fragment "State reloades sammen med koden"]
     [:p.fragment "Veldig mye bedre enn compile-deploy-restart"]
     ]
@@ -179,6 +179,6 @@ my-variable ; Not available here, throws exception"]]]
     [:h3 "Live reload 2.0: Figwheel"]]
 
    [:section
-    [:h1 "Bootstrap form"]
-    [forms/names]
+    [:h1 "Form validation"]
+    [forms/registration]
     ]])
