@@ -49,11 +49,8 @@ my-variable ; Not available here, throws exception"]]]
     [:pre.fragment [:code "(fn [x y]
     (+ (rand-int x) (rand-int y)))"]]
     [:pre.fragment [:code "(defn do-something [x y]
-    (+ (rand-int x) (rand-int y)))"]]]
-
-   [:section
-    [:h3 "Ei liste er et funksjonskall"]
-    [:pre [:code "(do-something 1 2)"]]]
+    (+ (rand-int x) (rand-int y)))"]]
+    [:pre.fragment [:code "(do-something 1 2)"]]]
 
    [:section
     [:h3 "Parantesbonanza"]
@@ -107,7 +104,7 @@ my-variable ; Not available here, throws exception"]]]
      [:code.clojure
       "(defn Comment [author]
   [:div.comment
-    [:div {:class \"commentAuthor\"}
+    [:h2 {:class \"commentAuthor\"}
       author]])"
       ]]]
 
@@ -116,7 +113,7 @@ my-variable ; Not available here, throws exception"]]]
     [:pre
      [:code.clojure
       "(defn Comment [author]
-  [:div.comment>div.commentAuthor author])"
+  [:div.comment>h2.commentAuthor author])"
       ]]]
 
    [:section
@@ -147,5 +144,4 @@ my-variable ; Not available here, throws exception"]]]
    [:section
     [:h3 "Live reload: Figwheel"]
     [:p.fragment "Reloadable code"]
-    [:p.fragment "Setup/teardown"]
-    [:img {:src "f5_key.png"}]]])
+    [:p.fragment "Setup/teardown"]]])

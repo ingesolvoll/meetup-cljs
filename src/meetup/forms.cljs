@@ -21,8 +21,9 @@
   (not (js/isNaN (js/parseInt input))))
 
 (defn validate-field [validations [key value]]
-  (let [validation-fn (key validations)]
-    (validation-fn value)))
+  (if-let [validation-fn (key validations)]
+    (validation-fn value)
+    true))
 
 (defn success-count [state validations]
   (->> state
@@ -36,7 +37,7 @@
 
 (defn completion-as-percentage [state validations]
   (-> (success-count @state validations)
-      (/ (count @state))
+      (/ (count validations))
       (* 100)
       (floor)))
 
