@@ -11,40 +11,19 @@
      "Inge Solvoll"]]
 
    [:section
-    [:h1 "Korps"]
-    [:img {:src "centertone-gold6.jpg"}]]
-
-   [:section
-    [:h3 "Korps: ikke bra"]
-    [:p.fragment.error "Dugnad"]
-    [:p.fragment.error "Fryktelig musikk"]
-    [:p.fragment.error "17. mai"]]
-
-   [:section
-    [:h3 "Korps: bra"]
-    [:p.fragment "Lese noter"]
-    [:p.fragment "Samspill"]
-    [:p.fragment "Sosialt for alle aldre"]
-    [:p.fragment "Alle er faktisk med"]]
-
-   [:section
-    [:h1 "Just say no"]]
-
-   [:section
-    [:h3 "Clojure: ikke bra"]
-    [:p.fragment "Uleselig"]
-    [:p.fragment "Dynamisk"]
-    [:p.fragment "Vanskelig rekruttering"]
-    [:p.fragment "Tung start"]
-    ]
-
-   [:section
     [:h2 "Clojure"]
     [:p.fragment "Java virtual machine"]
     [:p.fragment "ClojureScript"]
     [:p.fragment "Leiningen"]
     [:p.fragment "Namespaces"]
     [:p.fragment "Maven dependencies"]]
+
+   [:section
+    [:h3 "Clojure: ikke bra"]
+    [:p.fragment "Uleselig"]
+    [:p.fragment "Rekruttering"]
+    [:p.fragment "Tung start"]
+    ]
 
    [:section
     [:h1 "LISP 1-2-3"]
@@ -74,7 +53,7 @@ my-variable ; Not available here, throws exception"]]]
 
    [:section
     [:h3 "Ei liste er et funksjonskall"]
-    [:pre [:code "(split-string \",\" \"testing,testing\")"]]]
+    [:pre [:code "(do-something 1 2)"]]]
 
    [:section
     [:h3 "Parantesbonanza"]
@@ -162,23 +141,11 @@ my-variable ; Not available here, throws exception"]]]
 
    [:section
     [:h3 "Live reload 1.0"]
-    [:p.fragment [:img {:src "f5_key.png" :width "100" :height "100"}]]
-    [:p.fragment "State reloades sammen med koden"]
-    [:p.fragment "Veldig mye bedre enn compile-deploy-restart"]
+    [:p [:img {:src "f5_key.png" :width "500" :height "500"}]]
     ]
 
    [:section
-    [:h3 "Reloadable code"]
-    [:p.fragment "Skarpt skille mellom state og logikk"]
+    [:h3 "Live reload: Figwheel"]
+    [:p.fragment "Reloadable code"]
     [:p.fragment "Setup/teardown"]
-    [:p.fragment "Ikke snakke direkte med DOM"]
-    [:p.fragment "React <3"]
-    ]
-
-   [:section
-    [:h3 "Live reload 2.0: Figwheel"]]
-
-   [:section
-    [:h1 "Form validation"]
-    [forms/registration]
-    ]])
+    [:img {:src "f5_key.png"}]]])

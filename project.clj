@@ -7,6 +7,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.228"]
                  [reagent "0.5.1"]
+                 [devcards "0.2.0-8"]
                  [cljsjs/bootstrap "3.3.6-0"]]
 
   :plugins [[lein-figwheel "0.5.0-6"]
@@ -18,7 +19,16 @@
 
 
   :cljsbuild {:builds
-              [{:id           "dev"
+              [{:id           "devcards"
+                :source-paths ["src" "src-devcards"]
+                :figwheel     {:devcards true}
+                :compiler     {:main                 "meetup.devcards"
+                               :asset-path           "js/compiled/devcards_out"
+                               :output-to            "resources/public/js/compiled/meetup_devcards.js"
+                               :output-dir           "resources/public/js/compiled/devcards_out"
+                               :source-map-timestamp true}}
+
+               {:id           "dev"
                 :source-paths ["src"]
                 :figwheel     true
                 :compiler     {:main                 meetup.core

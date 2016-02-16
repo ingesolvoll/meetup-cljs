@@ -1,10 +1,6 @@
 (ns meetup.forms
-  (:require [reagent.core :as r]
-            [reagent.ratom :refer-macros [reaction]]
+  (:require [reagent.ratom :refer-macros [reaction]]
             [clojure.string :as str]))
-
-(defonce form-state (r/atom {:first-name "" :last-name "" :address "" :city "" :zip "" :mobile ""}))
-
 
 (defn input-field [label key state]
   [:div
@@ -24,34 +20,38 @@
 (defn valid-integer? [input]
   (not (js/isNaN (js/parseInt input))))
 
-(def validations {:first-name required
-                  :last-name  required
-                  :address    required
-                  :city       required
-                  :zip        valid-integer?
-                  :mobile     valid-integer?})
-
-(defn validate-field [[key value]]
+(defn validate-field [validations [key value]]
   (let [validation-fn (key validations)]
     (validation-fn value)))
 
-(def validation-results (reaction
-                          (map validate-field @form-state)))
+(defn success-count [state validations]
+  (->> state
+       (map (partial validate-field validations))
+       (filter true?)
+       count))
 
-(def success-number (reaction
-                      (->> @validation-results
-                           (filter true?)
-                           count)))
-
-(defn automatic-field [index key]
+(defn automatic-field [state index key]
   ^{:key index}
-  [input-field (name key) key form-state])
+  [input-field (name key) key state])
 
-(defn registration []
-  [:div
-   [:div "Completion: " (-> @success-number
-                            (/ (count @form-state))
-                            (* 100)
-                            (floor)) "%"]
-   (map-indexed automatic-field (keys @form-state))
-   ])
+(defn completion-as-percentage [state validations]
+  (-> (success-count @state validations)
+      (/ (count @state))
+      (* 100)
+      (floor)))
+
+(defn progress [state validations]
+  [:div.progress
+   (let [percent (str (completion-as-percentage state validations) "%")]
+     [:div.progress-bar {:class         (if (= percent "100%")
+                                          :progress-bar-success
+                                          :progress-bar-warning)
+                         :role          :progress-bar
+                         :aria-valuenow percent
+                         :aria-valuemin "0"
+                         :aria-valuemax "100"
+                         :style         {:width percent}} percent])])
+
+(defn registration [state]
+  [:div.form-group
+   (map-indexed (partial automatic-field state) (keys @state))])
