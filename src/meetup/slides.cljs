@@ -1,5 +1,4 @@
-(ns meetup.slides
-  (:require [meetup.forms :as forms]))
+(ns meetup.slides)
 
 (defn slides []
   [:div.slides
