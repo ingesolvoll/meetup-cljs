@@ -5,13 +5,13 @@
 
 (enable-console-print!)
 
-(defonce slides-state (r/atom nil))
+(defonce slides-index (r/atom nil))
 
 (defn slides-changed [e]
-  (reset! slides-state (.-indexh e)))
+  (reset! slides-index (.-indexh e)))
 
 (defn init []
-  (let [prev-slide @slides-state]
+  (let [prev-slide @slides-index]
     (.initialize js/Reveal)
     (when prev-slide
       (.slide js/Reveal prev-slide)))
