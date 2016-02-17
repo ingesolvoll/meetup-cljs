@@ -12,18 +12,10 @@
 
    [:section
     [:h2 "Clojure"]
-    [:p.fragment "Java virtual machine"]
-    [:p.fragment "ClojureScript"]
-    [:p.fragment "Leiningen"]
-    [:p.fragment "Namespaces"]
-    [:p.fragment "Maven dependencies"]]
-
-   [:section
-    [:h3 "Clojure: ikke bra"]
-    [:p.fragment "Uleselig"]
-    [:p.fragment "Rekruttering"]
-    [:p.fragment "Tung start"]
-    ]
+    [:p.fragment "Opprinnelig for Java"]
+    [:p.fragment "Leiningen, ikke Grunt"]
+    [:p.fragment "Namespaces uten lekkasje"]
+    [:p.fragment "Cons: uleselig"]]
 
    [:section
     [:h1 "LISP 1-2-3"]
@@ -142,6 +134,6 @@ my-variable ; Not available here, throws exception"]]]
     ]
 
    [:section
-    [:h3 "Live reload: Figwheel"]
+    [:h3 "Live reload: Figwheel is awesome"]
     [:p.fragment "Reloadable code"]
     [:p.fragment "Setup/teardown"]]])
