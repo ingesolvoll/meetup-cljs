@@ -1,5 +1,5 @@
 /* some style */
 
 .error {
-    background: red
+    border: 1px solid red;
 }
