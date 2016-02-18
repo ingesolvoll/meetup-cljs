@@ -129,7 +129,7 @@ my-variable ; Not available here, throws exception"]]]
 
    [:section
     [:h3 "Live reload 1.0"]
-    [:p [:img {:src "img/f5_key.gif" :width "500" :height "500"}]]
+    [:p [:img {:src "f5_key.png" :width "500" :height "500"}]]
     ]
 
    [:section
